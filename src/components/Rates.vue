@@ -1,28 +1,28 @@
 <template>
   <body>
-  <div class="actions">
+  <div class="actions" @submit.prevent="onSubmit">
     <div class="autocomplete">
       <v-autocomplete
-          auto-select-first
-          solo-inverted
-          label="Выберите валюту"
-          :data="rates"
-          :limit="10"
+          label="Введите валюту"
+          item-text="Name"
+          solo
       ></v-autocomplete>
+      <select v-model="selectedRate">
+        <option v-for="rate in rates"
+                :value="rate.Name"
+                :key="rate.Name"
+                >
+          {{ rate.Name }}
+        </option>
+      </select>
     </div>
     <div>
       <v-btn
+          @click="submit"
           outlined
       >Add</v-btn>
     </div>
     </div>
-  <div class="plates">
-    <div class="block">Название<br>Значение 1<br>Дата последнего изменения</div>
-    <div class="block">Название<br>Значение 2<br>Дата последнего изменения</div>
-    <div class="block">Название<br>Значение 3<br>Дата последнего изменения</div>
-  </div>
-  <v-data-table :headers="headers">
-  </v-data-table>
 </body>
 </template>
 
@@ -38,13 +38,15 @@ export default {
   data: () => ({
     rates: [],
     errors: [],
-    headers: [
-      {text: 'Валюта', align: 'center', sortable: false, value: 'name'},
-      {text: 'Значение', align: 'center', value: 'rate'},
-      {text: 'Дата изменения', align: 'center', value: 'date'},
-    ],
+    selectedRate: null,
+    price: null,
+    date: null,
+
   }),
   methods: {
+    submit() {
+      console.log(this.selectedRate)
+    },
 
   },
   computed: {
@@ -54,7 +56,6 @@ export default {
     axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
         .then(response => {
           this.rates = response.data.Valute
-          console.log(this.rates)
         })
         .catch(e => {
           this.errors.push(e)
@@ -68,28 +69,12 @@ body {
   width:100%;
 }
 .autocomplete {
-  width: 30%;
+  width: auto;
+  border-style: groove;
 }
 .actions {
   display: flex;
   justify-content: space-around;
 }
-.plates {
-  display: flex;
-  justify-content: space-around;
-}
-.block {
-  width: 200px;
-  height: 200px;
-  border: 1px solid;
-}
-table {
-  width: 100%;
-}
-thead, th {
-  background-color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
+
 </style>

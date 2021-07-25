@@ -18,6 +18,8 @@
 
         <!-- If using vue-router -->
         <router-view><Rates/></router-view>
+        <router-view><Cards/></router-view>
+        <router-view><Table/></router-view>
       </v-container>
     </v-main>
 
@@ -28,13 +30,13 @@
 </template>
 
 <script>
-import Rates from './components/Rates';
-
 export default {
   name: 'App',
 
   components: {
-    Rates,
+    Rates: () => import('./components/Rates'),
+    Cards: () => import('./components/Cards'),
+    Table: () => import('./components/Table'),
   },
 
   data: () => ({
@@ -51,5 +53,4 @@ export default {
 .item-link {
   margin: 0 0 0 20px ;
 }
-
 </style>

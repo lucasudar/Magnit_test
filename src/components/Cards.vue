@@ -1,6 +1,5 @@
 <template>
   <div class="plates">
-<!--  <button @click="addPlate(card)">addPlate</button>-->
     <p v-if="!plates.length">There are no data yet.</p>
     <ul>
       <li v-for="plate in plates"
@@ -23,9 +22,9 @@ export default {
     plates: [],
   }),
   methods: {
-    // addPlate(card) {
-    //   this.plates.push(card)
-    // }
+    addPlate(card) {
+      this.plates.push(card)
+    }
   },
   components: {
   },

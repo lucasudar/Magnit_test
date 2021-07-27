@@ -36,7 +36,6 @@ import axios from 'axios'
 export default {
   name: 'Rates',
   components: {
-      // Cards: () => import('./components/Cards'),
   },
   props: {
     card: {
@@ -73,7 +72,7 @@ export default {
     onSubmit () {
       let card = {
         selectedRate: this.selectedRate,
-        price: "this.getValue", // TODO убрать заглушку
+        price: this.getValue,
         currentTimeStamp: this.currentTimeStamp(),
       }
       this.$emit('card-submitted', card)
@@ -82,18 +81,19 @@ export default {
   },
   computed: {
     getValue: function () {
-      // for (let key in this.rates) {
-      //   if (key == this.selectedRate) {
-      //   }
-      // }
+      let array = Object.values(this.rates)
+      for (let obj in array) {
+        if (array[obj].Name == this.selectedRate) {
+          return array[obj].Value
+        }
+      }
       return this.getValue
-    }
-},
+    },
+  },
   created () {
     axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
         .then(response => {
           this.rates = response.data.Valute
-          console.log(this.rates)
         })
         .catch(e => {
           this.errors.push(e)

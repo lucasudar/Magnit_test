@@ -16,10 +16,10 @@
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
 
-        <!-- If using vue-router -->
-        <router-view><Rates/></router-view>
-        <router-view><Cards/></router-view>
-        <router-view><Table/></router-view>
+        <Rates></Rates>
+        <Cards></Cards>
+        <Table></Table>
+
       </v-container>
     </v-main>
 

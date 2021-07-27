@@ -1,14 +1,15 @@
 <template>
   <div class="plates">
     <p v-if="!plates.length">There are no data yet.</p>
-    <ul>
-      <li v-for="plate in plates"
-          :key="plate">
-        <p>{{ plate.selectedRate }}</p>
-        <p>Price: {{ plate.price }}</p>
-        <p>Last modify: {{ plate.currentTimeStamp }}</p>
-      </li>
-    </ul>
+    <v-card
+        v-for="plate in plates"
+        :key="plate"
+        elevation="1"
+    >
+      <v-card-title>{{ plate.selectedRate }}</v-card-title>
+      <v-card-subtitle>{{ plate.price }}</v-card-subtitle>
+      <v-card-text>{{ plate.currentTimeStamp }}</v-card-text>
+    </v-card>
   </div>
 </template>
 
@@ -18,13 +19,16 @@ export default {
   props: {
     card: Object
   },
+  watch: {
+    card: function () {
+      this.plates.push(this.card)
+    }
+  },
   data: () => ({
     plates: [],
   }),
   methods: {
-    addPlate(card) {
-      this.plates.push(card)
-    }
+
   },
   components: {
   },

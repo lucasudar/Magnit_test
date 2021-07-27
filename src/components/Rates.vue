@@ -21,7 +21,7 @@
 <!--    <span><p>{{ card }}</p></span>-->
     <div>
       <v-btn
-          @click="onSubmit(card)"
+          @click="onSubmit"
           outlined
       >Add
       </v-btn>
@@ -74,11 +74,11 @@ export default {
     onSubmit () {
       let card = {
         selectedRate: this.selectedRate,
-        price: "price",
+        price: "price", // TODO убрать заглушку
         currentTimeStamp: this.currentTimeStamp(),
       }
       console.log(card)
-      this.$emit('card-submitted', this.card)
+      this.$emit('card-submitted', card)
       this.selectedRate = null
       console.log('message emit from child component')
     },

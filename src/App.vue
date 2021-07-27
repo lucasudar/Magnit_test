@@ -16,7 +16,7 @@
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
 
-        <Rates></Rates>
+        <Rates @card-submitted='addCard'></Rates>
         <Cards></Cards>
         <Table></Table>
 
@@ -32,7 +32,11 @@
 <script>
 export default {
   name: 'App',
-
+  props: {
+    card: {
+      type: Object
+    }
+  },
   components: {
     Rates: () => import('./components/Rates'),
     Cards: () => import('./components/Cards'),
@@ -42,6 +46,12 @@ export default {
   data: () => ({
     //
   }),
+  methods: {
+    addCard(card) {
+      console.log(card)
+      this.card = card
+    }
+  },
 };
 </script>
 <style>

@@ -3,7 +3,6 @@
     <p v-if="!plates.length">There are no data yet.</p>
     <ul>
       <li v-for="plate in plates"
-          @card-submitted='addCard'
           :key="plate">
         <p>{{ plate.selectedRate }}</p>
         <p>Price: {{ plate.price }}</p>

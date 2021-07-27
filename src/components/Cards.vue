@@ -25,7 +25,11 @@ export default {
   },
   watch: {
     card: function () {
-      this.plates.push(this.card)
+      if (this.plates.length <= 2) {
+        this.plates.push(this.card)
+      } else {
+        alert('Maximum 3 plates!')
+      }
     }
   },
   data: () => ({

@@ -17,7 +17,7 @@
       <v-container fluid>
 
         <Rates @card-submitted='addCard'></Rates>
-        <Cards></Cards>
+        <Cards :card="card"></Cards>
         <Table></Table>
 
       </v-container>
@@ -33,9 +33,7 @@
 export default {
   name: 'App',
   props: {
-    card: {
-      type: Object
-    }
+
   },
   components: {
     Rates: () => import('./components/Rates'),
@@ -44,11 +42,10 @@ export default {
   },
 
   data: () => ({
-    //
+    card: null,
   }),
   methods: {
     addCard(card) {
-      console.log(card)
       this.card = card
     }
   },

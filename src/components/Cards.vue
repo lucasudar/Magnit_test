@@ -1,5 +1,6 @@
 <template>
   <div class="plates">
+<!--  <button @click="addPlate(card)">addPlate</button>-->
     <p v-if="!plates.length">There are no data yet.</p>
     <ul>
       <li v-for="plate in plates"
@@ -13,25 +14,20 @@
 </template>
 
 <script>
-// import Rates from './components/Rates.vue'
-
 export default {
   name: "Cards",
   props: {
-    card: {
-      type: Object
-    }
+    card: Object
   },
   data: () => ({
     plates: [],
   }),
   methods: {
-    addCard(card) {
-      this.plates.push(card)
-    }
+    // addPlate(card) {
+    //   this.plates.push(card)
+    // }
   },
   components: {
-    // Rates
   },
 }
 </script>

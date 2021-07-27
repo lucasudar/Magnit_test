@@ -32,7 +32,6 @@
 
 <script>
 import axios from 'axios'
-import { cloneDeep } from "lodash"
 
 export default {
   name: 'Rates',
@@ -45,7 +44,7 @@ export default {
     }
   },
   data: () => ({
-    rates: [],
+    rates: {},
     errors: [],
     price: null,
     selectedRate: null,
@@ -74,29 +73,27 @@ export default {
     onSubmit () {
       let card = {
         selectedRate: this.selectedRate,
-        price: "price", // TODO убрать заглушку
+        price: "this.getValue", // TODO убрать заглушку
         currentTimeStamp: this.currentTimeStamp(),
       }
-      console.log(card)
       this.$emit('card-submitted', card)
       this.selectedRate = null
-      console.log('message emit from child component')
     },
   },
   computed: {
     getValue: function () {
-      return this.rates.filter(function (element) {
-        let elementCopy = cloneDeep(element)
-        if (elementCopy.Name === this.selectedRate) {
-          return elementCopy.Value
-        }
-      })
+      // for (let key in this.rates) {
+      //   if (key == this.selectedRate) {
+      //   }
+      // }
+      return this.getValue
     }
 },
   created () {
     axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
         .then(response => {
           this.rates = response.data.Valute
+          console.log(this.rates)
         })
         .catch(e => {
           this.errors.push(e)

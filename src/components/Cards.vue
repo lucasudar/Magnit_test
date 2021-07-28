@@ -25,31 +25,36 @@ export default {
   },
   watch: {
     card: function () {
-      if (this.plates.length <= 2) {
-        this.plates.push(this.card)
-      } else {
-        alert('Maximum 3 plates!')
-      }
-    }
-  },
+      // let result
+      // let checkArray = Object.values(this.card)
+      // result = result.push(checkArray)
+      // console.log(result)
+      // if ()
+      this.plates.push(this.card)
+      // console.log(this.plates)
+    },
+    // plates: function () {
+    //   console.log('plates array changed')
+    //   let uniqIds = {}
+    //   let filtered = this.plates.filter(obj => !uniqIds[obj.selectedRate] && (uniqIds[obj.selectedRate] = true));
+    //   console.log(filtered)
+    // },
+  }
+  ,
   data: () => ({
     plates: [],
   }),
   methods: {
-    closePlate: function () {
-      let plates = document.querySelectorAll('.block');
-      for (let plate of plates) {
-        plate.firstChild.onclick = () => plate.remove();
-      }
-    },
     areYouSure: function () {
-      if (confirm("Are you sure?")) this.closePlate ()
-      else return;
+      if (confirm("Are you sure?")) {
+        let plates = document.querySelectorAll('.block');
+        for (let plate of plates) {
+          plate.firstChild.onclick = () => plate.remove();
+        }
+      } else return;
     }
   },
-  components: {
-
-  },
+  components: {},
 }
 </script>
 
@@ -59,11 +64,13 @@ export default {
   justify-content: space-around;
   margin-top: 20px;
 }
+
 .block {
   width: 200px;
   height: 200px;
   border: 1px solid;
 }
+
 .close {
   position: absolute;
   right: 1px;

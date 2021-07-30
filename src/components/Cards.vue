@@ -25,21 +25,15 @@ export default {
   },
   watch: {
     card: function () {
-      let rateName = this.card.selectedRate
-      let plashki = this.plates
-      let karta = this.card
       if (this.plates.length < 1) {
         this.plates.push(this.card)
       } else {
         let allRates = [];
-        this.plates.forEach(function (obj){
-          let propArray = Object.values(obj).splice(0,1).join()
-          allRates.push(propArray)
-        })
-        if (allRates.includes(rateName)) {
+        this.plates.forEach(obj => allRates.push(Object.values(obj).slice(0,1).join()))
+        if (allRates.includes(this.card.selectedRate)) {
           alert('Can\'t add, this is a copy!')
         } else {
-          plashki.push(karta)
+          this.plates.push(this.card)
         }
       }
     },

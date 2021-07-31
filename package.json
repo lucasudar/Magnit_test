@@ -11,6 +11,8 @@
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
     "npm": "^7.20.3",
+    "serialize-javascript": "^6.0.0",
+    "ssri": "^8.0.1",
     "vue": "^2.6.11",
     "vuetify": "^2.5.7"
   },

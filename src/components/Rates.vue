@@ -1,31 +1,33 @@
 <template>
   <body>
   <div class="actions">
-        <div class="autocomplete">
-<!--          <v-autocomplete-->
-<!--              v-for="rate in rates"-->
-<!--              :value="rate.Name"-->
-<!--              :key="rate.Name"-->
-<!--              label="Введите валюту"-->
-<!--              solo-->
-<!--          ></v-autocomplete>-->
-        </div>
-    <section v-if="errored">
-      <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-    </section>
-    <section v-else>
-      <div v-if="loading">Loading...</div>
-      <form style="border-style: groove">
-        <select v-model="selectedRate">
-          <option v-for="rate in rates"
-                  :value="rate.Name"
-                  :key="rate.Name"
-          >
-            {{ rate.Name }}
-          </option>
-        </select>
-      </form>
-    </section>
+    <div class="autocomplete">
+      <div class="autocomplete">
+        <section v-if="errored">
+          <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+        </section>
+        <section v-else>
+          <div v-if="loading">Loading...</div>
+          <v-autocomplete
+              v-model="selectedRate"
+              :items="rates1"
+              dense
+              filled
+              label="Введите валюту"
+          ></v-autocomplete>
+        </section>
+      </div>
+    </div>
+    <form style="border-style: groove" hidden>
+      <select v-model="selectedRate">
+        <option v-for="rate in rates"
+                :value="rate.Name"
+                :key="rate.Name"
+        >
+          {{ rate.Name }}
+        </option>
+      </select>
+    </form>
     <div>
       <v-btn
           @click="onSubmit"
@@ -46,14 +48,17 @@ export default {
   props: {
     card: {
       type: Object
-    }
+    },
   },
   data: () => ({
     rates: {},
+    ratesAutocomplete: [],
+    rates1: [],
     errored: false,
     loading: true,
     price: null,
     selectedRate: null,
+    placeHolderText: 'Введите валюту',
     currentTimeStamp() {
       let date = new Date()
 
@@ -101,6 +106,10 @@ export default {
     axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
         .then(response => {
           this.rates = response.data.Valute
+          let ratesAutocomplete = Object.values(this.rates)
+          for (let obj in ratesAutocomplete) {
+            this.rates1.push(ratesAutocomplete[obj].Name)
+          }
         })
         .catch(error => {
           console.log(error);
@@ -120,4 +129,9 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
+.autocomplete {
+  position: relative;
+}
+
 </style>

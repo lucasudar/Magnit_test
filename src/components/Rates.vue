@@ -1,13 +1,15 @@
 <template>
   <body>
   <div class="actions">
-    <!--    <div class="autocomplete">-->
-    <!--      <v-autocomplete-->
-    <!--          label="Введите валюту"-->
-    <!--          item-text="Name"-->
-    <!--          solo-->
-    <!--      ></v-autocomplete>-->
-    <!--    </div>-->
+        <div class="autocomplete">
+<!--          <v-autocomplete-->
+<!--              v-for="rate in rates"-->
+<!--              :value="rate.Name"-->
+<!--              :key="rate.Name"-->
+<!--              label="Введите валюту"-->
+<!--              solo-->
+<!--          ></v-autocomplete>-->
+        </div>
     <section v-if="errored">
       <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
     </section>

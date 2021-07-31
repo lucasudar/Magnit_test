@@ -11,6 +11,7 @@
           <v-autocomplete
               v-model="selectedRate"
               :items="rates1"
+              @keypress.enter="onSubmit"
               dense
               filled
               label="Введите валюту"

@@ -5,6 +5,7 @@
         class="block"
         v-for="(plate, index) in plates"
         :key="plate"
+        @click="showData(index)"
         elevation="1"
     >
       <button type="button" class="close"
@@ -34,9 +35,9 @@ export default {
           alert('Can\'t add, this is a copy!')
         } else {
           this.plates.push(this.card)
-          console.log(this.plates[1])
         }
       }
+      this.$emit('send-plates', this.plates)
     },
   },
   data: () => ({
@@ -47,10 +48,13 @@ export default {
       if (confirm("Are you sure?")) {
         this.plates.splice(index, 1)
       } else return;
+    },
+    showData: function (index) {
+      this.$emit('show-data', index)
     }
   },
   components: {},
-  }
+}
 
 </script>
 

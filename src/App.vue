@@ -17,8 +17,8 @@
       <v-container fluid>
 
         <Rates @card-submitted='addCard'></Rates>
-        <Cards :card="card"></Cards>
-        <Table></Table>
+        <Cards :card="card" @show-data="showData" @send-plates="sendPlates"></Cards>
+        <Table :index="index" :array="array"></Table>
 
       </v-container>
     </v-main>
@@ -32,9 +32,7 @@
 <script>
 export default {
   name: 'App',
-  props: {
-
-  },
+  props: {},
   components: {
     Rates: () => import('./components/Rates'),
     Cards: () => import('./components/Cards'),
@@ -43,13 +41,21 @@ export default {
 
   data: () => ({
     card: null,
+    index: null,
+    array: [],
   }),
   methods: {
     addCard(card) {
       this.card = card
+    },
+    showData(index) {
+      this.index = index
+    },
+    sendPlates(plates) {
+      this.array = plates
     }
-  },
-};
+  }
+}
 </script>
 <style>
 .navbar-component {

@@ -24,7 +24,6 @@
         </select>
       </form>
     </section>
-<!--    <span><p>{{ card }}</p></span>-->
     <div>
       <v-btn
           @click="onSubmit"
@@ -41,8 +40,7 @@ import axios from 'axios'
 
 export default {
   name: 'Rates',
-  components: {
-  },
+  components: {},
   props: {
     card: {
       type: Object
@@ -76,7 +74,7 @@ export default {
     },
   }),
   methods: {
-    onSubmit () {
+    onSubmit() {
       let card = {
         selectedRate: this.selectedRate,
         price: this.getValue,
@@ -97,8 +95,8 @@ export default {
       return this.getValue
     },
   },
-  created () {
-      axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
+  created() {
+    axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
         .then(response => {
           this.rates = response.data.Valute
         })
@@ -113,8 +111,9 @@ export default {
 
 <style>
 body {
-  width:100%;
+  width: 100%;
 }
+
 .actions {
   display: flex;
   justify-content: space-around;

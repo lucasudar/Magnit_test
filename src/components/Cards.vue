@@ -47,7 +47,7 @@ export default {
     areYouSure: function (index) {
       if (confirm("Are you sure?")) {
         this.plates.splice(index, 1)
-      } else return;
+      }
     },
     showData: function (index) {
       this.$emit('show-data', index)

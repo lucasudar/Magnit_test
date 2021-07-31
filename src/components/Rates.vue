@@ -1,8 +1,6 @@
 <template>
-  <body>
   <div class="actions">
     <div class="autocomplete">
-      <div class="autocomplete">
         <section v-if="errored">
           <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
@@ -17,7 +15,6 @@
               label="Введите валюту"
           ></v-autocomplete>
         </section>
-      </div>
     </div>
     <form style="border-style: groove" hidden>
       <select v-model="selectedRate">
@@ -37,7 +34,6 @@
       </v-btn>
     </div>
   </div>
-  </body>
 </template>
 
 <script>

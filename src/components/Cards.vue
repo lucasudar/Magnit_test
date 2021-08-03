@@ -19,10 +19,13 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Cards",
   props: {
     card: Object,
+    updatedPriceArray: [],
   },
   watch: {
     card: function () {
@@ -39,6 +42,29 @@ export default {
       }
       this.$emit('send-plates', this.plates)
     },
+    plates: function () {
+      console.log('изменение в плейтс')
+      // TODO: для всех карточек в массиве this.plates получать новый price каждую минуту через api и заменять в массиве.
+      // TODO: Записывать получаемые значения в объект, а далее массив этих объектов передавать по клику в items компонента table.vue
+
+      axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
+          .then(response => {
+            this.updatedPriceArray = response.data.Valute
+            let updatedRates = Object.values(this.updatedPriceArray)
+            console.log(updatedRates)
+            console.log(this.plates)
+            // TODO: пробежаться по именам в массиве plates,
+            // TODO: найти новые значения курса во вновь полученном массиве updatedRates и перезаписать в plates
+            // for (let obj in updatedRates) {
+            //   if (updatedRates[obj].Name == this.plates.%INDEX%.selectedRate) {
+            //     this.plates.%INDEX%.Value = updatedRates[obj].Value
+            //   }
+            //   }
+          })
+          .catch(error => {
+            console.log(error);
+          })
+    }
   },
   data: () => ({
     plates: [],
